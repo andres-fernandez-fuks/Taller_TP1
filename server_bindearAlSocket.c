@@ -49,8 +49,7 @@ int bindearAlSocket(char* port_name, unsigned char* buffer, size_t* bytes_recv) 
     }
 
     if ((peer_socket = accept(socket_fd, (struct sockaddr *)&address->ai_addr,
-            (socklen_t*)&address->ai_addrlen)) <0)
-    {
+            (socklen_t*)&address->ai_addrlen)) <0) {
         perror("accept");
         exit(EXIT_FAILURE);
     }
@@ -59,9 +58,6 @@ int bindearAlSocket(char* port_name, unsigned char* buffer, size_t* bytes_recv) 
     *bytes_recv = recv(peer_socket, buffer, PATH_MAX, 0);
     freeaddrinfo(results);
     return 0;
-
-
-
 }
 
 void inicializar_hints_server(struct addrinfo* hints) {
