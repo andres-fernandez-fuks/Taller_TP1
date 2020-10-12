@@ -20,7 +20,7 @@ int cipherCode(cipher_t* self, unsigned char* input, size_t len, char* key,
 }
 
 int cipherDecode(cipher_t* self, unsigned char* input, size_t len, char* key,
-                 unsigned char* buffer[]) {
+                 unsigned char* buffer) {
     return self->cipher_callback(input, len, key, buffer, DECODE_OP);
 }
 

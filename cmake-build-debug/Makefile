@@ -131,17 +131,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named TP_1
+# Target rules for targets named server
 
 # Build rule for target.
-TP_1: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TP_1
-.PHONY : TP_1
+server: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 server
+.PHONY : server
 
 # fast build rule for target.
-TP_1/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/build
-.PHONY : TP_1/fast
+server/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+.PHONY : server/fast
+
+#=============================================================================
+# Target rules for targets named client
+
+# Build rule for target.
+client: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 client
+.PHONY : client
+
+# fast build rule for target.
+client/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
+.PHONY : client/fast
 
 client_aux.o: client_aux.c.o
 
@@ -149,7 +162,7 @@ client_aux.o: client_aux.c.o
 
 # target to build an object file
 client_aux.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/client_aux.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client_aux.c.o
 .PHONY : client_aux.c.o
 
 client_aux.i: client_aux.c.i
@@ -158,7 +171,7 @@ client_aux.i: client_aux.c.i
 
 # target to preprocess a source file
 client_aux.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/client_aux.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client_aux.c.i
 .PHONY : client_aux.c.i
 
 client_aux.s: client_aux.c.s
@@ -167,35 +180,35 @@ client_aux.s: client_aux.c.s
 
 # target to generate assembly for a file
 client_aux.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/client_aux.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client_aux.c.s
 .PHONY : client_aux.c.s
 
-client_conectarAlSocket.o: client_conectarAlSocket.c.o
+client_connectToSocket.o: client_connectToSocket.c.o
 
-.PHONY : client_conectarAlSocket.o
+.PHONY : client_connectToSocket.o
 
 # target to build an object file
-client_conectarAlSocket.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/client_conectarAlSocket.c.o
-.PHONY : client_conectarAlSocket.c.o
+client_connectToSocket.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client_connectToSocket.c.o
+.PHONY : client_connectToSocket.c.o
 
-client_conectarAlSocket.i: client_conectarAlSocket.c.i
+client_connectToSocket.i: client_connectToSocket.c.i
 
-.PHONY : client_conectarAlSocket.i
+.PHONY : client_connectToSocket.i
 
 # target to preprocess a source file
-client_conectarAlSocket.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/client_conectarAlSocket.c.i
-.PHONY : client_conectarAlSocket.c.i
+client_connectToSocket.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client_connectToSocket.c.i
+.PHONY : client_connectToSocket.c.i
 
-client_conectarAlSocket.s: client_conectarAlSocket.c.s
+client_connectToSocket.s: client_connectToSocket.c.s
 
-.PHONY : client_conectarAlSocket.s
+.PHONY : client_connectToSocket.s
 
 # target to generate assembly for a file
-client_conectarAlSocket.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/client_conectarAlSocket.c.s
-.PHONY : client_conectarAlSocket.c.s
+client_connectToSocket.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client_connectToSocket.c.s
+.PHONY : client_connectToSocket.c.s
 
 client_main.o: client_main.c.o
 
@@ -203,7 +216,7 @@ client_main.o: client_main.c.o
 
 # target to build an object file
 client_main.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/client_main.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client_main.c.o
 .PHONY : client_main.c.o
 
 client_main.i: client_main.c.i
@@ -212,7 +225,7 @@ client_main.i: client_main.c.i
 
 # target to preprocess a source file
 client_main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/client_main.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client_main.c.i
 .PHONY : client_main.c.i
 
 client_main.s: client_main.c.s
@@ -221,7 +234,7 @@ client_main.s: client_main.c.s
 
 # target to generate assembly for a file
 client_main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/client_main.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client_main.c.s
 .PHONY : client_main.c.s
 
 common_aux_cipher.o: common_aux_cipher.c.o
@@ -230,7 +243,8 @@ common_aux_cipher.o: common_aux_cipher.c.o
 
 # target to build an object file
 common_aux_cipher.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/common_aux_cipher.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/common_aux_cipher.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/common_aux_cipher.c.o
 .PHONY : common_aux_cipher.c.o
 
 common_aux_cipher.i: common_aux_cipher.c.i
@@ -239,7 +253,8 @@ common_aux_cipher.i: common_aux_cipher.c.i
 
 # target to preprocess a source file
 common_aux_cipher.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/common_aux_cipher.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/common_aux_cipher.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/common_aux_cipher.c.i
 .PHONY : common_aux_cipher.c.i
 
 common_aux_cipher.s: common_aux_cipher.c.s
@@ -248,7 +263,8 @@ common_aux_cipher.s: common_aux_cipher.c.s
 
 # target to generate assembly for a file
 common_aux_cipher.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/common_aux_cipher.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/common_aux_cipher.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/common_aux_cipher.c.s
 .PHONY : common_aux_cipher.c.s
 
 common_cipher.o: common_cipher.c.o
@@ -257,7 +273,8 @@ common_cipher.o: common_cipher.c.o
 
 # target to build an object file
 common_cipher.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/common_cipher.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/common_cipher.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/common_cipher.c.o
 .PHONY : common_cipher.c.o
 
 common_cipher.i: common_cipher.c.i
@@ -266,7 +283,8 @@ common_cipher.i: common_cipher.c.i
 
 # target to preprocess a source file
 common_cipher.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/common_cipher.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/common_cipher.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/common_cipher.c.i
 .PHONY : common_cipher.c.i
 
 common_cipher.s: common_cipher.c.s
@@ -275,7 +293,8 @@ common_cipher.s: common_cipher.c.s
 
 # target to generate assembly for a file
 common_cipher.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/common_cipher.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/common_cipher.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/common_cipher.c.s
 .PHONY : common_cipher.c.s
 
 common_decoding.o: common_decoding.c.o
@@ -284,7 +303,8 @@ common_decoding.o: common_decoding.c.o
 
 # target to build an object file
 common_decoding.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/common_decoding.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/common_decoding.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/common_decoding.c.o
 .PHONY : common_decoding.c.o
 
 common_decoding.i: common_decoding.c.i
@@ -293,7 +313,8 @@ common_decoding.i: common_decoding.c.i
 
 # target to preprocess a source file
 common_decoding.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/common_decoding.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/common_decoding.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/common_decoding.c.i
 .PHONY : common_decoding.c.i
 
 common_decoding.s: common_decoding.c.s
@@ -302,62 +323,36 @@ common_decoding.s: common_decoding.c.s
 
 # target to generate assembly for a file
 common_decoding.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/common_decoding.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/common_decoding.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/common_decoding.c.s
 .PHONY : common_decoding.c.s
 
-main.o: main.c.o
+server_bindToSocket.o: server_bindToSocket.c.o
 
-.PHONY : main.o
-
-# target to build an object file
-main.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/main.c.o
-.PHONY : main.c.o
-
-main.i: main.c.i
-
-.PHONY : main.i
-
-# target to preprocess a source file
-main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/main.c.i
-.PHONY : main.c.i
-
-main.s: main.c.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/main.c.s
-.PHONY : main.c.s
-
-server_bindearAlSocket.o: server_bindearAlSocket.c.o
-
-.PHONY : server_bindearAlSocket.o
+.PHONY : server_bindToSocket.o
 
 # target to build an object file
-server_bindearAlSocket.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/server_bindearAlSocket.c.o
-.PHONY : server_bindearAlSocket.c.o
+server_bindToSocket.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server_bindToSocket.c.o
+.PHONY : server_bindToSocket.c.o
 
-server_bindearAlSocket.i: server_bindearAlSocket.c.i
+server_bindToSocket.i: server_bindToSocket.c.i
 
-.PHONY : server_bindearAlSocket.i
+.PHONY : server_bindToSocket.i
 
 # target to preprocess a source file
-server_bindearAlSocket.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/server_bindearAlSocket.c.i
-.PHONY : server_bindearAlSocket.c.i
+server_bindToSocket.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server_bindToSocket.c.i
+.PHONY : server_bindToSocket.c.i
 
-server_bindearAlSocket.s: server_bindearAlSocket.c.s
+server_bindToSocket.s: server_bindToSocket.c.s
 
-.PHONY : server_bindearAlSocket.s
+.PHONY : server_bindToSocket.s
 
 # target to generate assembly for a file
-server_bindearAlSocket.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/server_bindearAlSocket.c.s
-.PHONY : server_bindearAlSocket.c.s
+server_bindToSocket.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server_bindToSocket.c.s
+.PHONY : server_bindToSocket.c.s
 
 server_main.o: server_main.c.o
 
@@ -365,7 +360,7 @@ server_main.o: server_main.c.o
 
 # target to build an object file
 server_main.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/server_main.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server_main.c.o
 .PHONY : server_main.c.o
 
 server_main.i: server_main.c.i
@@ -374,7 +369,7 @@ server_main.i: server_main.c.i
 
 # target to preprocess a source file
 server_main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/server_main.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server_main.c.i
 .PHONY : server_main.c.i
 
 server_main.s: server_main.c.s
@@ -383,7 +378,7 @@ server_main.s: server_main.c.s
 
 # target to generate assembly for a file
 server_main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TP_1.dir/build.make CMakeFiles/TP_1.dir/server_main.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server_main.c.s
 .PHONY : server_main.c.s
 
 # Help Target
@@ -394,13 +389,14 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... TP_1"
+	@echo "... client"
+	@echo "... server"
 	@echo "... client_aux.o"
 	@echo "... client_aux.i"
 	@echo "... client_aux.s"
-	@echo "... client_conectarAlSocket.o"
-	@echo "... client_conectarAlSocket.i"
-	@echo "... client_conectarAlSocket.s"
+	@echo "... client_connectToSocket.o"
+	@echo "... client_connectToSocket.i"
+	@echo "... client_connectToSocket.s"
 	@echo "... client_main.o"
 	@echo "... client_main.i"
 	@echo "... client_main.s"
@@ -413,12 +409,9 @@ help:
 	@echo "... common_decoding.o"
 	@echo "... common_decoding.i"
 	@echo "... common_decoding.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... server_bindearAlSocket.o"
-	@echo "... server_bindearAlSocket.i"
-	@echo "... server_bindearAlSocket.s"
+	@echo "... server_bindToSocket.o"
+	@echo "... server_bindToSocket.i"
+	@echo "... server_bindToSocket.s"
 	@echo "... server_main.o"
 	@echo "... server_main.i"
 	@echo "... server_main.s"

@@ -17,7 +17,7 @@ int cipherInit(cipher_t* self, char* method_name);
 int cipherCode(cipher_t* self, unsigned char* input, size_t len, char* key,
                unsigned char* buffer);
 int cipherDecode(cipher_t* self, unsigned char* input, size_t len, char* key,
-                 unsigned char* buffer[]);
+                 unsigned char* buffer);
 int cipherEncoding(cipher_t* self,char* method_name);
 
 #endif //TP_1_COMMON_CIPHER_H

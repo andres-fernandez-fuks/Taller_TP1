@@ -33,14 +33,14 @@ char* obtener_argumento(char* argumento_original) {
     char* pos_nombre_arg = strrchr(argumento_original,'=');
     if (!pos_nombre_arg) return NULL;
     pos_nombre_arg += 1; // la posicion real es la proxima al "="
-    size_t largo_nombre_arg = strlen(argumento_original)-((int)pos_nombre_arg-(int)argumento_original);
+    int largo_nombre_arg = (int) strlen(argumento_original)-((int)pos_nombre_arg-(int)argumento_original);
     char* argumento = malloc(largo_nombre_arg+1);
     strncpy(argumento,pos_nombre_arg,largo_nombre_arg);
     argumento[largo_nombre_arg] = '\0';
     return argumento;
 }
 
-void imprimir_cadena(unsigned char* cadena_encriptada,size_t largo_cadena, char* format) {
+void printString(unsigned char* cadena_encriptada, size_t largo_cadena, char* format) {
     for (size_t i = 0; i < largo_cadena; ++i)
         printf(format,cadena_encriptada[i]);
     puts("");

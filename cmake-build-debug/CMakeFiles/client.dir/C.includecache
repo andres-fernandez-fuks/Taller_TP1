@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/andres/CLionProjects/Taller/TP_1/client_conectarAlSocket.c
+/home/andres/CLionProjects/Taller/TP_1/client_connectToSocket.c
 stdlib.h
 -
 netdb.h
