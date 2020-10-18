@@ -2,7 +2,7 @@
 // Created by andres on 8/10/20.
 //
 
-#include "common_aux_socket.h"
+#include "common_socket_aux.h"
 #ifndef AI_PASSIVE
 #define AI_PASSIVE 1
 #endif
@@ -70,14 +70,6 @@ int sendMessage(int socket_fd, unsigned char* message, size_t len) {
     return 0;
 }
 
-int shutdownAndClose(int socket_fd) {
-    if (shutdown(socket_fd, SHUT_RDWR) < 0)
-        return 1;
-    if (close(socket_fd) < 0)
-        return 1;
-    return 0;
-}
-
 int bindToSocket(struct addrinfo* addrinfo, int* connct_sckt, int*
 accpt_sckt, char* port_name) {
     struct addrinfo hints, *results, *address;
@@ -139,7 +131,7 @@ buffer) {
     return contador;
 }
 
-int closeSocket(int socket_fd) {
+int shutDownAndCloseSocket(int socket_fd) {
     if (shutdown(socket_fd,SHUT_RDWR) != 0)
         return 1;
     return close(socket_fd);

@@ -1,1 +1,0 @@
-/usr/bin/cc -g   CMakeFiles/client.dir/common_aux_cipher.c.o CMakeFiles/client.dir/common_decoding.c.o CMakeFiles/client.dir/client_connectToSocket.c.o CMakeFiles/client.dir/common_cipher.c.o CMakeFiles/client.dir/client_main.c.o CMakeFiles/client.dir/client_aux.c.o  -o client 

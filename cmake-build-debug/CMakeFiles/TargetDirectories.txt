@@ -1,4 +1,0 @@
-/home/andres/CLionProjects/Taller/TP_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/andres/CLionProjects/Taller/TP_1/cmake-build-debug/CMakeFiles/server.dir
-/home/andres/CLionProjects/Taller/TP_1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/andres/CLionProjects/Taller/TP_1/cmake-build-debug/CMakeFiles/client.dir

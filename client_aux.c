@@ -3,14 +3,11 @@
 //
 
 #include <stddef.h>
+#include <string.h>
+#include <stdio.h>
 #include "client_aux.h"
 
 #define READ_SIZE 64
-
-int initializeTransmisionSocket(tSocket_t* socket) {
-    memset(socket, 0, sizeof(tSocket_t));
-    return transmissionSocketInit(socket);
-}
 
 int encodeMessage(cipher_t* cipher, unsigned char* input_buf, unsigned char*
 encoded_buf, size_t read_bytes, char** argv) {
@@ -20,11 +17,11 @@ encoded_buf, size_t read_bytes, char** argv) {
         encoding = stringEncode(cipher, input_buf, encoded_buf, read_bytes,
                                 key_string);
     }
-    free(key_string);
+    //free(key_string);
     return encoding;
 }
 
-int readEncodeAndSend(cipher_t* cipher, tSocket_t* socket, char** argv) {
+int readEncodeAndSend(cipher_t* cipher, socket_t* socket, char** argv) {
     unsigned char input_buffer[READ_SIZE] = {0};
     size_t read_bytes = obtenerInputString(input_buffer);
     if (!read_bytes)
@@ -40,10 +37,4 @@ int readEncodeAndSend(cipher_t* cipher, tSocket_t* socket, char** argv) {
 size_t obtenerInputString(unsigned char* buffer) {
     size_t contador = fread(buffer,1,READ_SIZE,stdin);
     return contador;
-}
-
-int finishClientProgram(cipher_t* cipher, tSocket_t * socket) {
-    if (cipherDestroy(cipher) != 0)
-        return 1;
-    return transmissionSocketClose(socket);
 }
