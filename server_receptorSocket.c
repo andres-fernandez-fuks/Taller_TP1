@@ -5,7 +5,7 @@
 #include "server_receptorSocket.h"
 
 int receptorSocketInit(rSocket_t* self) {
-    self->addr_info = malloc(sizeof(struct addrinfo));
+    self-> addr_info = malloc(sizeof(struct addrinfo));
     self-> connection_socket_fd = 0;
     self-> acceptance_socket_fd = 0;
     return 0;

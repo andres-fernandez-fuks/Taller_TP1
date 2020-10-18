@@ -8,6 +8,12 @@
 #define TP_1_COMMON_CIPHER_H
 
 
+/*
+ * Las 3 funciones de decodificacion reciben parametros parecidos, aunque no
+ * exactamente los mismos. Para manejar la diferencia entre los parametros que
+ * recibe cada funcion, uso el vector de punteros genericos "extra"/
+ */
+
 typedef int (*callback_t)(unsigned char* input, size_t len, char* key_string,
                           unsigned char* buffer, void** extra);
 
