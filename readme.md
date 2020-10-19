@@ -34,7 +34,7 @@ Con un poco más de detalle, el funcionamiento del código es el siguiente:
 
 * callback_t decoding_function: es un puntero a la función de encriptación. Funciona para los 3 tipos de encriptación: Cesar, Vigenere y RC4. Si bien las tres funciones comparten sólo algunos parámetros de encriptación, los parámetros en los que difieren son pasados a través de un vector de punteros genéricos, el cual es armado por el cipher de acuerdo a cada función, y desreferenciado dentro de cada una de éstas.
 
-![Captura](capturas/extravector.png)
+![Captura](capturas/extraVector.png)
 
 . En la función Cesar, el vector recibe solamente el tipo de operacion: codificar o decodificar.
 
