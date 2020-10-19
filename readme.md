@@ -34,11 +34,19 @@ Con un poco más de detalle, el funcionamiento del código es el siguiente:
 
 * callback_t decoding_function: es un puntero a la función de encriptación. Funciona para los 3 tipos de encriptación: Cesar, Vigenere y RC4. Si bien las tres funciones comparten sólo algunos parámetros de encriptación, los parámetros en los que difieren son pasados a través de un vector de punteros genéricos, el cual es armado por el cipher de acuerdo a cada función, y desreferenciado dentro de cada una de éstas.
 
+![Captura](capturas/extravector.png)
+
+. En la función Cesar, el vector recibe solamente el tipo de operacion: codificar o decodificar.
+
+. En la función Vigenere, recibe el tipo de operación y la posición actual en el mensaje.
+
+. En la función RC4, recibe la posición actual en el mensaje (pos_1 en rc4_output), el vector random que usa la función ya inicializado y la pos_2 en rc4_output.
+
 * El cipher codifica el trozo de 64 Bytes del mensaje y el mismo es enviado al socket cliente para que se lo reenvíe al socket servidor. El envío del mensaje se hace mediante un ciclo, ya que no necesariamente los 64 Bytes (o el largo del trozo de mensaje) son enviados en una única operación.
 
 * TDA Socket:
 
-	Es el TDA que se encarga de enviar y/o recibir un mensaje a/desde otro socket. Tiene los siguientes atributos:
+	Es el TDA que se encarga de conectarse a los sockets "reales" (los provistos por la librería correspondiente) y de enviar y/o recibir un mensaje a/desde otro socket. Tiene los siguientes atributos:
 
 		- struct addrinfo* addr_info: es una estructura propia de la librería de sockets, necesaria para la conexión entre los mismos.
     	- int connection_socket_fd: guarda el fd correspondiente al socket de conexión (en el caso del socket cliente, es el único socket necesario).
