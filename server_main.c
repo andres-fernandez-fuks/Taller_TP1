@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
     initializeSocket(&socket);
     int val_bind = socketBind(&socket, argv[1]);
     if (val_bind != 0)
-        return 1;
+        return finishProgram(NULL, &socket, 1);
     bool shouldBreak = 0;
     cipher_t cipher;
     cipherCreate(&cipher, argv, DECODE_OP);
@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
         int val_rcv = receiveDecodeAndPrint(&cipher, &socket, argv,
                                             &shouldBreak);
         if (val_rcv != 0)
-            return 1;
+            return finishProgram(&cipher, &socket, 1);
     }
-    return finishProgram(&cipher, &socket);
+    return finishProgram(&cipher, &socket, 0);
 }

@@ -8,11 +8,11 @@
 
 void rc4InitiateVector(unsigned char* random_array, unsigned char* key,
                        unsigned int key_length);
-int rc4Encoding(unsigned char* input, size_t len, char* key_string,
-                unsigned char* buffer, void** extra);
-int vigenereEncoding(unsigned char* input, size_t len, char* key_string,
-                     unsigned char* buffer, void** extra);
-int cesarEncoding(unsigned char* input, size_t len, char* offset_string,
-                  unsigned char* buffer, void** extra);
+int rc4Encoding(unsigned char* input, size_t len, unsigned char* buffer,
+                void** extra);
+int vigenereEncoding(unsigned char* input, size_t len, unsigned char* buffer,
+                     void** extra);
+int cesarEncoding(unsigned char* input, size_t len, unsigned char* buffer,
+                  void** extra);
 
 #endif //TP_1_COMMON_DECODING_H

@@ -32,8 +32,7 @@ int cipherTranslate(cipher_t* self, unsigned char* input, size_t len,
     void** extra = assembleExtraVector(self);
     if (!extra)
         return 1;
-    int val_encoding = self-> decoding_function(input, len, self->key_string,
-                                               buffer, extra);
+    int val_encoding = self-> decoding_function(input, len, buffer, extra);
     free(extra);
     return val_encoding;
 }
@@ -78,19 +77,21 @@ int rc4Init(cipher_t* self) {
 }
 
 void** cesarVector(cipher_t* self) {
-    void** extra = malloc(sizeof(void*));
-    if (!extra)
-        return NULL;
-    extra[0] = (void*) &self->op_type;
-    return extra;
-}
-
-void** vigenereVector(cipher_t* self) {
     void** extra = malloc(2*sizeof(void*));
     if (!extra)
         return NULL;
     extra[0] = (void*) &self->op_type;
+    extra[1] = (void*) self->key_string;
+    return extra;
+}
+
+void** vigenereVector(cipher_t* self) {
+    void** extra = malloc(3*sizeof(void*));
+    if (!extra)
+        return NULL;
+    extra[0] = (void*) &self->op_type;
     extra[1] = (void*) &self->count;
+    extra[2] = (void*) self->key_string;
     return extra;
 }
 
