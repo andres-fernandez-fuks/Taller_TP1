@@ -73,3 +73,5 @@ Con un poco más de detalle, el funcionamiento del código es el siguiente:
 * En un primer momento, había intentado leer el stdin de a 64 bytes, pero pasando todo a un buffer que contuviera la totalidad del mensaje. A partir de ahí, sólo se tenía un buffer a codificar y enviar al servidor. El problema es que eso implicaba poner un límite a la cantidad de bytes que podía contener el mensaje, porque el buffer estaba en memoria estática y necesitaba darle un tamaño antes de leer stdin. Cuando entendí mejor lo que se pedía en el enunciado, tuve que cambiar el funcionamiento del código.
 
 
+
+
