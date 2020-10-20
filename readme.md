@@ -14,7 +14,7 @@ El siguiente esquema muestra de forma muy general el funcionamiento del código:
 
 Con un poco más de detalle, el funcionamiento del código es el siguiente:
 
-* Se recibe por input un mensaje, el cual inmediatamente es tomado como una cadena de bytes, y no como un string de caracteres. Este mensaje se lee de forma cíclica, en trozos de 64 bytes. El fin del ciclo se da cuando la función **feof** devuelve verdadero. La función **fread** marca la cantidad de bytes leídos, que puede ser como máximo 64. Esta cantidad de bytes leídos se utiliza a lo largo del ciclo de envío del mensaje.
+* Se recibe por input un mensaje, el cual inmediatamente es tomado como una cadena de bytes, y no como un string de caracteres (se transforma a unsigned char y no se usa strlen para conocer su largo). Este mensaje se lee de forma cíclica, en trozos de 64 bytes. El fin del ciclo se da cuando la función **feof** devuelve verdadero. La función **fread** marca la cantidad de bytes leídos, que puede ser como máximo 64. Esta cantidad de bytes leídos se utiliza a lo largo del ciclo de envío del mensaje.
 
 * Se envía el trozo del mensaje leído a un cipher, que se encargará de codificarlo de acuerdo a los argumentos recibidos por parámetro.
 
@@ -32,15 +32,15 @@ Con un poco más de detalle, el funcionamiento del código es el siguiente:
 
     Los últimos 3 valores del Cipher son necesarios para guardar el "estado" del mensaje que se está encriptando. Una de las dificultades del TP es que tanto Vigenere como RC4 son métodos que contemplan la encriptación de un mensaje total, por lo que, al leer el mensaje de a 64 Bytes, es necesario entre lecturas guardar el estado de algunas variables que permitan llevar a cabo la encriptación de forma correcta. Cesar no presentó esta dificultad, porque su encriptación no depende de la posición actual del mensaje.
 
-* callback_t decoding_function: es un puntero a la función de encriptación. Funciona para los 3 tipos de encriptación: Cesar, Vigenere y RC4. Si bien las tres funciones comparten sólo algunos parámetros de encriptación, los parámetros en los que difieren son pasados a través de un vector de punteros genéricos, el cual es armado por el cipher de acuerdo a cada función, y desreferenciado dentro de cada una de éstas.
+* **callback_t decoding_function**: es un puntero a la función de encriptación. Funciona para los 3 tipos de encriptación: Cesar, Vigenere y RC4. Si bien las tres funciones comparten sólo algunos parámetros de encriptación, los parámetros en los que difieren son pasados a través de un vector de punteros genéricos, el cual es armado por el cipher de acuerdo a cada función, y desreferenciado dentro de cada una de éstas.
 
 ![Captura](capturas/extraVector.png)
 
-. En la función Cesar, el vector recibe solamente el tipo de operacion: codificar o decodificar.
+. En la función **Cesar**, el vector recibe la clave de decodificación (como string) y el tipo de operación: codificar o decodificar.
 
-. En la función Vigenere, recibe el tipo de operación y la posición actual en el mensaje.
+. En la función **Vigenere**, recibe la clave de decodificación, el tipo de operación y la posición actual en el mensaje.
 
-. En la función RC4, recibe la posición actual en el mensaje (pos_1 en rc4_output), el vector random que usa la función ya inicializado y la pos_2 en rc4_output.
+. En la función **RC4**, recibe la posición actual en el mensaje (pos_1 en rc4_output), el vector random que usa la función ya inicializado y la pos_2 en rc4_output.
 
 * El cipher codifica el trozo de 64 Bytes del mensaje y el mismo es enviado al socket cliente para que se lo reenvíe al socket servidor. El envío del mensaje se hace mediante un ciclo, ya que no necesariamente los 64 Bytes (o el largo del trozo de mensaje) son enviados en una única operación.
 
@@ -58,7 +58,7 @@ Con un poco más de detalle, el funcionamiento del código es el siguiente:
 
 * El trozo de mensaje se envía a un nuevo cipher, que esta vez se encargará de decodificarlo. Para Cesar y Vigenere, se realizará la operación matemática inversa a la realizada durante la codificación. Para RC4, la operación será exactamente la misma que en su codificación.
 
-* Se envía el trozo de mensaje a la salida estándar, y se vuelve a iniciar el ciclo, hata que se haya leído la totalidad del mensaje.
+* Se envía el trozo de mensaje para ser impreso por salida estándar, y se vuelve a iniciar el ciclo. Recién en este momento, se vuelve a tomar la cadena de bytes como un string, por lo que se hace un printf con "%c" como formato.
 
 ### **COMENTARIOS**
 
