@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include "client_aux.h"
 
-#define READ_SIZE 64
+#define CHUNK_SIZE 64
 
 int encodeMessage(cipher_t* cipher, unsigned char* input_buf, unsigned char*
 encoded_buf, size_t read_bytes, char** argv) {
@@ -22,7 +22,7 @@ encoded_buf, size_t read_bytes, char** argv) {
 }
 
 int readEncodeAndSend(cipher_t* cipher, socket_t* socket, char** argv) {
-    unsigned char input_buffer[READ_SIZE] = {0};
+    unsigned char input_buffer[CHUNK_SIZE] = {0};
     size_t read_bytes = obtenerInputString(input_buffer);
     if (!read_bytes)
         return 1;
@@ -35,6 +35,6 @@ int readEncodeAndSend(cipher_t* cipher, socket_t* socket, char** argv) {
 }
 
 size_t obtenerInputString(unsigned char* buffer) {
-    size_t contador = fread(buffer,1,READ_SIZE,stdin);
+    size_t contador = fread(buffer, 1, CHUNK_SIZE, stdin);
     return contador;
 }

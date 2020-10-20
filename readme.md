@@ -12,6 +12,10 @@ El siguiente esquema muestra de forma muy general el funcionamiento del código:
 
 ![Captura](capturas/cicloDelMensaje.png)
 
+Incluyo también una especie de diagrama de secuencia del envío del mensaje. Como no es un programa orientado a objetos, me di algunas libertades con la idea de que el diagrama sea lo más claro posible en cuanto al funcionamiento del programa.
+
+![Captura](capturas/diagramaDeSecuencia.png)
+
 Con un poco más de detalle, el funcionamiento del código es el siguiente:
 
 * Se recibe por input un mensaje, el cual inmediatamente es tomado como una cadena de bytes, y no como un string de caracteres (se transforma a unsigned char y no se usa strlen para conocer su largo). Este mensaje se lee de forma cíclica, en trozos de 64 bytes. El fin del ciclo se da cuando la función **feof** devuelve verdadero. La función **fread** marca la cantidad de bytes leídos, que puede ser como máximo 64. Esta cantidad de bytes leídos se utiliza a lo largo del ciclo de envío del mensaje.

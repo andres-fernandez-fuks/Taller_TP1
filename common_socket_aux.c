@@ -7,6 +7,7 @@
 #define AI_PASSIVE 1
 #endif
 
+#define CHUNK_SIZE 64
 
 void clientInitializeHints(struct addrinfo* hints);
 void iterateAddressesForConnecting(struct addrinfo* results, struct addrinfo**
@@ -118,8 +119,9 @@ buffer) {
     if (peer_socket <0)
         return 1;
     size_t contador = 0;
-    while (contador < 64) {
-        int bytes_recv = recv(peer_socket, &buffer[contador], 64-contador, 0);
+    while (contador < CHUNK_SIZE) {
+        int bytes_recv = recv(peer_socket, &buffer[contador],
+        	CHUNK_SIZE-contador, 0);
         if (bytes_recv < 0) {
             printf("Error: %s\n", strerror(errno));
             return 1;

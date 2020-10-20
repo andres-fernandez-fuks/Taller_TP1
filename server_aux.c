@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include "server_aux.h"
 
+#define CHUNK_SIZE 64
+
 int decode(cipher_t* cipher, unsigned char* coded_buffer, unsigned char*
 decoded_buffer, size_t read_bytes, char** argv) {
     if (!read_bytes)
@@ -18,15 +20,15 @@ decoded_buffer, size_t read_bytes, char** argv) {
 
 int receiveDecodeAndPrint(cipher_t* cipher, socket_t* socket, char** argv,
                           bool* shouldBreak) {
-    unsigned char coded_buffer[64] = {0};
+    unsigned char coded_buffer[CHUNK_SIZE] = {0};
     size_t read_bytes = socketReceiveMessage(socket, coded_buffer);
-    unsigned char decoded_buffer[64] = {0};
+    unsigned char decoded_buffer[CHUNK_SIZE] = {0};
     int val_decoding = decode(cipher, coded_buffer, decoded_buffer, read_bytes,
                               argv);
     if (val_decoding != 0)
         return 1;
     printOutput(decoded_buffer, read_bytes);
-    if (read_bytes <64) {
+    if (read_bytes < CHUNK_SIZE) {
         *shouldBreak = 1;
     }
     return 0;

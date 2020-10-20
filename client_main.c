@@ -7,7 +7,6 @@
 #include "common_aux.h"
 
 #define CODE_OP 0
-#define READ_SIZE 64
 
 int main(int argc, char** argv) {
     socket_t socket;
