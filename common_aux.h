@@ -4,7 +4,7 @@
 
 #include "common_socket.h"
 #include "common_cipher.h"
-#include "common_cipher_aux.h"
+#include "client.h"
 
 #ifndef TP_1_COMMON_AUX_H
 #define TP_1_COMMON_AUX_H
@@ -13,3 +13,4 @@
 
 int initializeSocket(socket_t* socket);
 int finishProgram(cipher_t* cipher, socket_t* socket, int ret_value);
+char* obtenerArgumento(char* argumento_original);

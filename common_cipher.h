@@ -20,15 +20,14 @@ typedef int (*callback_t)(unsigned char* input, size_t len, unsigned char*
 typedef struct cipher{
     callback_t decoding_function;
     char* key_string;
-    size_t type;
     size_t count;
     int op_type;
+    int method;
     unsigned char rc4_array[256];
     size_t rc4_pos2;
 } cipher_t;
 
 int cipherInit(cipher_t* self, char* method_name, char* key, int op_type);
-int cipherEncoding(cipher_t* self,char* method_name);
 int cipherDestroy(cipher_t* self);
 int cipherTranslate(cipher_t* self, unsigned char* input, size_t len,
                     unsigned char* buffer);

@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/andy/CLionProjects/TP_1/common_socket.c
+common_socket.h
+/home/andy/CLionProjects/TP_1/common_socket.h
+
+/home/andy/CLionProjects/TP_1/common_socket.h
+stddef.h
+-
+netdb.h
+-
+string.h
+-
+unistd.h
+-
+stdlib.h
+-
+

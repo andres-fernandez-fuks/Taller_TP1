@@ -3,25 +3,19 @@
 //
 
 #include <stdio.h>
-#include "client_aux.h"
+#include "client.h"
 #include "common_aux.h"
 
 #define CODE_OP 0
 
 int main(int argc, char** argv) {
-    socket_t socket;
-    initializeSocket(&socket);
-    int val_connect = socketConnect(&socket, argv[1], argv[2]);
-	if (val_connect != 0)
-		return finishProgram(NULL, &socket, 1);
-	cipher_t cipher;
-    cipherCreate(&cipher, argv, CODE_OP);
-	while (!feof(stdin)) {
-        if (readEncodeAndSend(&cipher, &socket, argv) != 0)
-            return finishProgram(&cipher, &socket, 1);
-    }
-    return finishProgram(&cipher, &socket, 0);
+    client_t client;
+    initializeClient(&client);
+    int val_connect = clientEstablishConnection(&client, argv[1], argv[2]);
+    if (val_connect != 0)
+        return finishClientProgram(&client, 1);
+    char* method = obtenerArgumento(argv[3]);
+    char* key = obtenerArgumento(argv[4]);
+    int val_send = clientSendMessage(&client, method, key);
+    return finishClientProgram(&client, val_send);
 }
-
-
-

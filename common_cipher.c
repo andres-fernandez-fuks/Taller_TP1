@@ -18,13 +18,14 @@ int cesarInit(cipher_t* self);
 int vigenereInit(cipher_t* self);
 int rc4Init(cipher_t* self);
 void** assembleExtraVector(cipher_t* self);
+int determineEncodingMethod(cipher_t* self, char* method_name);
 
 int cipherInit(cipher_t* self, char* method_name, char* key, int op_type) {
     self-> op_type = op_type;
     self-> key_string = malloc(strlen(key)+1);
     strncpy(self-> key_string, key, strlen(key));
     self-> key_string[strlen(key)] = '\0';
-    return cipherEncoding(self, method_name);
+    return determineEncodingMethod(self, method_name);
 }
 
 int cipherTranslate(cipher_t* self, unsigned char* input, size_t len,
@@ -37,16 +38,6 @@ int cipherTranslate(cipher_t* self, unsigned char* input, size_t len,
     return val_encoding;
 }
 
-int cipherEncoding(cipher_t* self, char* method_name) {
-    if (strcmp(method_name,"cesar") == 0)
-        return cesarInit(self);
-    else if (strcmp(method_name,"vigenere") == 0)
-        return vigenereInit(self);
-    else if (strcmp(method_name,"rc4") == 0)
-        return rc4Init(self);
-    return 1;
-}
-
 int cipherDestroy(cipher_t* self) {
     free(self-> key_string);
     return 0;
@@ -54,20 +45,20 @@ int cipherDestroy(cipher_t* self) {
 
 int cesarInit(cipher_t* self) {
     self-> decoding_function = &cesarEncoding;
-    self-> type = CESAR_TYPE;
+    self-> method = CESAR_TYPE;
     return 0;
 }
 
 int vigenereInit(cipher_t* self) {
     self-> decoding_function = &vigenereEncoding;
     self-> count = 0;
-    self-> type = VIGENERE_TYPE;
+    self-> method = VIGENERE_TYPE;
     return 0;
 }
 
 int rc4Init(cipher_t* self) {
     self-> decoding_function = &rc4Encoding;
-    self-> type = RC4_TYPE;
+    self-> method = RC4_TYPE;
     self-> count = 0;
     self-> rc4_pos2 = 0;
     memset(self->rc4_array, 0, sizeof(self->rc4_array));
@@ -106,7 +97,7 @@ void** rc4Vector(cipher_t* self) {
 }
 
 void** assembleExtraVector(cipher_t* self) {
-    switch (self->type) {
+    switch (self->method) {
         case CESAR_TYPE:
             return cesarVector(self);
         case VIGENERE_TYPE:
@@ -115,4 +106,14 @@ void** assembleExtraVector(cipher_t* self) {
             return rc4Vector(self);
     }
     return NULL;
+}
+
+int determineEncodingMethod(cipher_t* self, char* method_name) {
+    if (strcmp(method_name,"cesar") == 0)
+        return cesarInit(self);
+    else if (strcmp(method_name,"vigenere") == 0)
+        return vigenereInit(self);
+    else if (strcmp(method_name,"rc4") == 0)
+        return rc4Init(self);
+    return 1;
 }

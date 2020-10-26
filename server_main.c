@@ -2,25 +2,19 @@
 // Created by andres on 10/10/20.
 //
 
-#include "server_aux.h"
+#include "server.h"
 #include "common_aux.h"
 
 #define DECODE_OP 1
 
 int main(int argc, char** argv) {
-    socket_t socket;
-    initializeSocket(&socket);
-    int val_bind = socketBind(&socket, argv[1]);
+    server_t server;
+    initializeServer(&server);
+    int val_bind = serverEstablishConnection(&server, argv[1]);
     if (val_bind != 0)
-        return finishProgram(NULL, &socket, 1);
-    bool shouldBreak = 0;
-    cipher_t cipher;
-    cipherCreate(&cipher, argv, DECODE_OP);
-    while (!shouldBreak) {
-        int val_rcv = receiveDecodeAndPrint(&cipher, &socket, argv,
-                                            &shouldBreak);
-        if (val_rcv != 0)
-            return finishProgram(&cipher, &socket, 1);
-    }
-    return finishProgram(&cipher, &socket, 0);
+        return finishServerProgram(&server, 1);
+    char* method = obtenerArgumento(argv[2]);
+    char* key = obtenerArgumento(argv[3]);
+    int val_receive = serverReceiveMessage(&server, method, key);
+    return finishServerProgram(&server, val_receive);
 }
