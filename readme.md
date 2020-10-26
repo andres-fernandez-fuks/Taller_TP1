@@ -14,13 +14,29 @@ El siguiente esquema muestra de forma muy general el funcionamiento del código:
 
 Incluyo también una especie de diagrama de secuencia del envío del mensaje. Como no es un programa orientado a objetos, me di algunas libertades con la idea de que el diagrama sea lo más claro posible en cuanto al funcionamiento del programa.
 
-![Captura](capturas/diagramaDeSecuencia.png)
+![Captura](capturas/MessageDiagram.png)
 
 Con un poco más de detalle, el funcionamiento del código es el siguiente:
 
-* Se recibe por input un mensaje, el cual inmediatamente es tomado como una cadena de bytes, y no como un string de caracteres (se transforma a unsigned char y no se usa strlen para conocer su largo). Este mensaje se lee de forma cíclica, en trozos de 64 bytes. El fin del ciclo se da cuando la función **feof** devuelve verdadero. La función **fread** marca la cantidad de bytes leídos, que puede ser como máximo 64. Esta cantidad de bytes leídos se utiliza a lo largo del ciclo de envío del mensaje.
+* TDA Client / TDA Server:
 
-* Se envía el trozo del mensaje leído a un cipher, que se encargará de codificarlo de acuerdo a los argumentos recibidos por parámetro.
+    Son los TDAs que se encargan de llevar a cabo el envío y la recepción del mensaje de forma general. Ambos cuentan con los siguientes atributos:
+
+        - TDA Cipher: para codificar/decodificar el mensaje.
+        - TDA Socket: para enviar/recibir el mensaje.
+        - Buffer: el buffer utilizado para transportar cada chunk del mensaje desde que se lee de STDIN hasta que se escribe en STDOUT.
+
+
+* Primero, el TDA Server establece a través de su TDA Socket la conexión necesaria para eventualmente recibir el mensaje. Si la conexión falla, el programa del Server se cierra. Esta paso no se incluyó en el diagrama porque el diagrama muestra otro tipo de secuencia, y agregar este paso lo volvía confuso.
+
+* Si la conexión fue exitosa, el Server se quedará esperando a que el Client haga su conexión correspondiente.
+
+* Por su lado, el TDA Client establecerá la conexión necesaria para el envío del mensaje. De no poder conectarse, el programa del Client se cierra. De lo contrario, se iniciará el ciclo de envío del mensaje. A partir de aquí, la secuencia contada seguirá el mismo esquema que el diagrama mostrado.
+
+* El Cliente lee el mensaje de STDIN. Este mensaje es tomado como una cadena de bytes, y no como un string de caracteres (se transforma a unsigned char y no se usa strlen para conocer su largo). Este mensaje se lee de forma cíclica, en trozos de 64 bytes. El fin del ciclo se da cuando la función **feof** devuelve verdadero. La función **fread** marca la cantidad de bytes leídos, que puede ser como máximo 64. Esta cantidad de bytes leídos se utiliza a lo largo del ciclo de envío del mensaje.
+
+
+* El Cliente envía el trozo del mensaje leído al TDA Cipher que tiene instanciado, que se encargará de codificarlo de acuerdo a los argumentos recibidos por parámetro.
 
 * TDA Cipher:
 
@@ -46,7 +62,7 @@ Con un poco más de detalle, el funcionamiento del código es el siguiente:
 
 . En la función **RC4**, recibe la posición actual en el mensaje (pos_1 en rc4_output), el vector random que usa la función ya inicializado y la pos_2 en rc4_output.
 
-* El cipher codifica el trozo de 64 Bytes del mensaje y el mismo es enviado al socket cliente para que se lo reenvíe al socket servidor. El envío del mensaje se hace mediante un ciclo, ya que no necesariamente los 64 Bytes (o el largo del trozo de mensaje) son enviados en una única operación.
+* El cipher codifica el trozo de 64 Bytes del mensaje en un buffer correspondiente al Cliente. El Cliente le indica a su Socket que reenvíe este buffer al socket servidor. El envío del mensaje se hace mediante un ciclo, ya que no necesariamente los 64 Bytes (o el largo del trozo de mensaje) son enviados en una única operación.
 
 * TDA Socket:
 

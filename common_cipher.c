@@ -28,12 +28,11 @@ int cipherInit(cipher_t* self, char* method_name, char* key, int op_type) {
     return determineEncodingMethod(self, method_name);
 }
 
-int cipherTranslate(cipher_t* self, unsigned char* input, size_t len,
-                    unsigned char* buffer) {
+int cipherTranslate(cipher_t* self, unsigned char* input, size_t len) {
     void** extra = assembleExtraVector(self);
     if (!extra)
         return 1;
-    int val_encoding = self-> decoding_function(input, len, buffer, extra);
+    int val_encoding = self-> decoding_function(input, len, extra);
     free(extra);
     return val_encoding;
 }

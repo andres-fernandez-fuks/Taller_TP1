@@ -123,14 +123,6 @@
 		<Unit filename="/home/andy/CLionProjects/TP_1/client_main.c">
 			<Option target="client"/>
 		</Unit>
-		<Unit filename="/home/andy/CLionProjects/TP_1/common_aux.c">
-			<Option target="client"/>
-			<Option target="server"/>
-		</Unit>
-		<Unit filename="/home/andy/CLionProjects/TP_1/common_aux.h">
-			<Option target="client"/>
-			<Option target="server"/>
-		</Unit>
 		<Unit filename="/home/andy/CLionProjects/TP_1/common_cipher.c">
 			<Option target="client"/>
 			<Option target="server"/>
@@ -144,6 +136,14 @@
 			<Option target="server"/>
 		</Unit>
 		<Unit filename="/home/andy/CLionProjects/TP_1/common_decoding.h">
+			<Option target="client"/>
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/home/andy/CLionProjects/TP_1/common_parsing.c">
+			<Option target="client"/>
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/home/andy/CLionProjects/TP_1/common_parsing.h">
 			<Option target="client"/>
 			<Option target="server"/>
 		</Unit>

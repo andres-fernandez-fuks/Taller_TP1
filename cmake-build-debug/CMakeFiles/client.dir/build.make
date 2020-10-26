@@ -103,18 +103,18 @@ CMakeFiles/client.dir/client.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/client.dir/client.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/andy/CLionProjects/TP_1/client.c -o CMakeFiles/client.dir/client.c.s
 
-CMakeFiles/client.dir/common_aux.c.o: CMakeFiles/client.dir/flags.make
-CMakeFiles/client.dir/common_aux.c.o: ../common_aux.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/andy/CLionProjects/TP_1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/client.dir/common_aux.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/client.dir/common_aux.c.o   -c /home/andy/CLionProjects/TP_1/common_aux.c
+CMakeFiles/client.dir/common_parsing.c.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/common_parsing.c.o: ../common_parsing.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/andy/CLionProjects/TP_1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/client.dir/common_parsing.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/client.dir/common_parsing.c.o   -c /home/andy/CLionProjects/TP_1/common_parsing.c
 
-CMakeFiles/client.dir/common_aux.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/client.dir/common_aux.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/andy/CLionProjects/TP_1/common_aux.c > CMakeFiles/client.dir/common_aux.c.i
+CMakeFiles/client.dir/common_parsing.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/client.dir/common_parsing.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/andy/CLionProjects/TP_1/common_parsing.c > CMakeFiles/client.dir/common_parsing.c.i
 
-CMakeFiles/client.dir/common_aux.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/client.dir/common_aux.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/andy/CLionProjects/TP_1/common_aux.c -o CMakeFiles/client.dir/common_aux.c.s
+CMakeFiles/client.dir/common_parsing.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/client.dir/common_parsing.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/andy/CLionProjects/TP_1/common_parsing.c -o CMakeFiles/client.dir/common_parsing.c.s
 
 CMakeFiles/client.dir/common_cipher.c.o: CMakeFiles/client.dir/flags.make
 CMakeFiles/client.dir/common_cipher.c.o: ../common_cipher.c
@@ -159,7 +159,7 @@ CMakeFiles/client.dir/common_socket.c.s: cmake_force
 client_OBJECTS = \
 "CMakeFiles/client.dir/client_main.c.o" \
 "CMakeFiles/client.dir/client.c.o" \
-"CMakeFiles/client.dir/common_aux.c.o" \
+"CMakeFiles/client.dir/common_parsing.c.o" \
 "CMakeFiles/client.dir/common_cipher.c.o" \
 "CMakeFiles/client.dir/common_decoding.c.o" \
 "CMakeFiles/client.dir/common_socket.c.o"
@@ -169,7 +169,7 @@ client_EXTERNAL_OBJECTS =
 
 client: CMakeFiles/client.dir/client_main.c.o
 client: CMakeFiles/client.dir/client.c.o
-client: CMakeFiles/client.dir/common_aux.c.o
+client: CMakeFiles/client.dir/common_parsing.c.o
 client: CMakeFiles/client.dir/common_cipher.c.o
 client: CMakeFiles/client.dir/common_decoding.c.o
 client: CMakeFiles/client.dir/common_socket.c.o

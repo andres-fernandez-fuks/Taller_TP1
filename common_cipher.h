@@ -14,8 +14,7 @@
  * recibe cada funcion, uso el vector de punteros genericos "extra"/
  */
 
-typedef int (*callback_t)(unsigned char* input, size_t len, unsigned char*
-        buffer, void** extra);
+typedef int (*callback_t)(unsigned char* input, size_t len, void** extra);
 
 typedef struct cipher{
     callback_t decoding_function;
@@ -29,7 +28,6 @@ typedef struct cipher{
 
 int cipherInit(cipher_t* self, char* method_name, char* key, int op_type);
 int cipherDestroy(cipher_t* self);
-int cipherTranslate(cipher_t* self, unsigned char* input, size_t len,
-                    unsigned char* buffer);
+int cipherTranslate(cipher_t* self, unsigned char* input, size_t len);
 
 #endif //TP_1_COMMON_CIPHER_H

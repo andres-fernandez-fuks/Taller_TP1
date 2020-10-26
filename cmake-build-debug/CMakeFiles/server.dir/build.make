@@ -103,18 +103,18 @@ CMakeFiles/server.dir/server.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/server.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/andy/CLionProjects/TP_1/server.c -o CMakeFiles/server.dir/server.c.s
 
-CMakeFiles/server.dir/common_aux.c.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/common_aux.c.o: ../common_aux.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/andy/CLionProjects/TP_1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/server.dir/common_aux.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/common_aux.c.o   -c /home/andy/CLionProjects/TP_1/common_aux.c
+CMakeFiles/server.dir/common_parsing.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/common_parsing.c.o: ../common_parsing.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/andy/CLionProjects/TP_1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/server.dir/common_parsing.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/common_parsing.c.o   -c /home/andy/CLionProjects/TP_1/common_parsing.c
 
-CMakeFiles/server.dir/common_aux.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/common_aux.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/andy/CLionProjects/TP_1/common_aux.c > CMakeFiles/server.dir/common_aux.c.i
+CMakeFiles/server.dir/common_parsing.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/common_parsing.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/andy/CLionProjects/TP_1/common_parsing.c > CMakeFiles/server.dir/common_parsing.c.i
 
-CMakeFiles/server.dir/common_aux.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/common_aux.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/andy/CLionProjects/TP_1/common_aux.c -o CMakeFiles/server.dir/common_aux.c.s
+CMakeFiles/server.dir/common_parsing.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/common_parsing.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/andy/CLionProjects/TP_1/common_parsing.c -o CMakeFiles/server.dir/common_parsing.c.s
 
 CMakeFiles/server.dir/common_cipher.c.o: CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/common_cipher.c.o: ../common_cipher.c
@@ -159,7 +159,7 @@ CMakeFiles/server.dir/common_socket.c.s: cmake_force
 server_OBJECTS = \
 "CMakeFiles/server.dir/server_main.c.o" \
 "CMakeFiles/server.dir/server.c.o" \
-"CMakeFiles/server.dir/common_aux.c.o" \
+"CMakeFiles/server.dir/common_parsing.c.o" \
 "CMakeFiles/server.dir/common_cipher.c.o" \
 "CMakeFiles/server.dir/common_decoding.c.o" \
 "CMakeFiles/server.dir/common_socket.c.o"
@@ -169,7 +169,7 @@ server_EXTERNAL_OBJECTS =
 
 server: CMakeFiles/server.dir/server_main.c.o
 server: CMakeFiles/server.dir/server.c.o
-server: CMakeFiles/server.dir/common_aux.c.o
+server: CMakeFiles/server.dir/common_parsing.c.o
 server: CMakeFiles/server.dir/common_cipher.c.o
 server: CMakeFiles/server.dir/common_decoding.c.o
 server: CMakeFiles/server.dir/common_socket.c.o

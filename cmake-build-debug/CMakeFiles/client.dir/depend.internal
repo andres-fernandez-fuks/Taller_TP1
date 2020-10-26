@@ -10,16 +10,9 @@ CMakeFiles/client.dir/client.c.o
 CMakeFiles/client.dir/client_main.c.o
  /home/andy/CLionProjects/TP_1/client.h
  /home/andy/CLionProjects/TP_1/client_main.c
- /home/andy/CLionProjects/TP_1/common_aux.h
  /home/andy/CLionProjects/TP_1/common_cipher.h
  /home/andy/CLionProjects/TP_1/common_decoding.h
- /home/andy/CLionProjects/TP_1/common_socket.h
-CMakeFiles/client.dir/common_aux.c.o
- /home/andy/CLionProjects/TP_1/client.h
- /home/andy/CLionProjects/TP_1/common_aux.c
- /home/andy/CLionProjects/TP_1/common_aux.h
- /home/andy/CLionProjects/TP_1/common_cipher.h
- /home/andy/CLionProjects/TP_1/common_decoding.h
+ /home/andy/CLionProjects/TP_1/common_parsing.h
  /home/andy/CLionProjects/TP_1/common_socket.h
 CMakeFiles/client.dir/common_cipher.c.o
  /home/andy/CLionProjects/TP_1/common_cipher.c
@@ -28,6 +21,13 @@ CMakeFiles/client.dir/common_cipher.c.o
 CMakeFiles/client.dir/common_decoding.c.o
  /home/andy/CLionProjects/TP_1/common_decoding.c
  /home/andy/CLionProjects/TP_1/common_decoding.h
+CMakeFiles/client.dir/common_parsing.c.o
+ /home/andy/CLionProjects/TP_1/client.h
+ /home/andy/CLionProjects/TP_1/common_cipher.h
+ /home/andy/CLionProjects/TP_1/common_decoding.h
+ /home/andy/CLionProjects/TP_1/common_parsing.c
+ /home/andy/CLionProjects/TP_1/common_parsing.h
+ /home/andy/CLionProjects/TP_1/common_socket.h
 CMakeFiles/client.dir/common_socket.c.o
  /home/andy/CLionProjects/TP_1/common_socket.c
  /home/andy/CLionProjects/TP_1/common_socket.h

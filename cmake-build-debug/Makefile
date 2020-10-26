@@ -210,36 +210,6 @@ client_main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client_main.c.s
 .PHONY : client_main.c.s
 
-common_aux.o: common_aux.c.o
-
-.PHONY : common_aux.o
-
-# target to build an object file
-common_aux.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/common_aux.c.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/common_aux.c.o
-.PHONY : common_aux.c.o
-
-common_aux.i: common_aux.c.i
-
-.PHONY : common_aux.i
-
-# target to preprocess a source file
-common_aux.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/common_aux.c.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/common_aux.c.i
-.PHONY : common_aux.c.i
-
-common_aux.s: common_aux.c.s
-
-.PHONY : common_aux.s
-
-# target to generate assembly for a file
-common_aux.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/common_aux.c.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/common_aux.c.s
-.PHONY : common_aux.c.s
-
 common_cipher.o: common_cipher.c.o
 
 .PHONY : common_cipher.o
@@ -299,6 +269,36 @@ common_decoding.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/common_decoding.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/common_decoding.c.s
 .PHONY : common_decoding.c.s
+
+common_parsing.o: common_parsing.c.o
+
+.PHONY : common_parsing.o
+
+# target to build an object file
+common_parsing.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/common_parsing.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/common_parsing.c.o
+.PHONY : common_parsing.c.o
+
+common_parsing.i: common_parsing.c.i
+
+.PHONY : common_parsing.i
+
+# target to preprocess a source file
+common_parsing.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/common_parsing.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/common_parsing.c.i
+.PHONY : common_parsing.c.i
+
+common_parsing.s: common_parsing.c.s
+
+.PHONY : common_parsing.s
+
+# target to generate assembly for a file
+common_parsing.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/common_parsing.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/common_parsing.c.s
+.PHONY : common_parsing.c.s
 
 common_socket.o: common_socket.c.o
 
@@ -400,15 +400,15 @@ help:
 	@echo "... client_main.o"
 	@echo "... client_main.i"
 	@echo "... client_main.s"
-	@echo "... common_aux.o"
-	@echo "... common_aux.i"
-	@echo "... common_aux.s"
 	@echo "... common_cipher.o"
 	@echo "... common_cipher.i"
 	@echo "... common_cipher.s"
 	@echo "... common_decoding.o"
 	@echo "... common_decoding.i"
 	@echo "... common_decoding.s"
+	@echo "... common_parsing.o"
+	@echo "... common_parsing.i"
+	@echo "... common_parsing.s"
 	@echo "... common_socket.o"
 	@echo "... common_socket.i"
 	@echo "... common_socket.s"

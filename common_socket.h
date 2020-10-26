@@ -15,8 +15,12 @@ typedef int (*connection_callback_t)(int sockfd, const struct sockaddr *addr,
         socklen_t addrlen);
 
 typedef struct Socket{
-    struct addrinfo* addr_info;
+    struct addrinfo* connection_info;
+    struct addrinfo* results;
+    struct addrinfo hints;
     int socket_fd;
+    connection_callback_t connection_callback;
+    int connection_type;
 } socket_t;
 /*
 struct addrinfo {
@@ -30,11 +34,15 @@ struct addrinfo {
     struct addrinfo *ai_next;
 };
 */
-int socketInit(socket_t* self);
-int socketConnect(socket_t* self, char* host_name, char* port_name);
+int getaddrinfo(const char *node, const char *service,
+               const struct addrinfo *hints, struct addrinfo **res);
+
+void freeaddrinfo(struct addrinfo *res);
+
+int socketInit(socket_t* self, int connection_type);
 int socketSendMessage(socket_t* self, unsigned char* message, size_t len);
-int socketBind(socket_t* self, char* port_name);
-size_t socketReceiveMessage(socket_t* self, unsigned char* buffer);
+int socketConnect(socket_t* self, char* host_name, char* port_name);
+int socketReceiveMessage(socket_t* self, unsigned char* buffer);
 int socketClose(socket_t* self);
 int socketAcceptConnection(socket_t* connection_sckt, socket_t* accept_sckt);
 

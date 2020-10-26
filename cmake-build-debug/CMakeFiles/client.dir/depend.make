@@ -9,17 +9,10 @@ CMakeFiles/client.dir/client.c.o: ../common_socket.h
 
 CMakeFiles/client.dir/client_main.c.o: ../client.h
 CMakeFiles/client.dir/client_main.c.o: ../client_main.c
-CMakeFiles/client.dir/client_main.c.o: ../common_aux.h
 CMakeFiles/client.dir/client_main.c.o: ../common_cipher.h
 CMakeFiles/client.dir/client_main.c.o: ../common_decoding.h
+CMakeFiles/client.dir/client_main.c.o: ../common_parsing.h
 CMakeFiles/client.dir/client_main.c.o: ../common_socket.h
-
-CMakeFiles/client.dir/common_aux.c.o: ../client.h
-CMakeFiles/client.dir/common_aux.c.o: ../common_aux.c
-CMakeFiles/client.dir/common_aux.c.o: ../common_aux.h
-CMakeFiles/client.dir/common_aux.c.o: ../common_cipher.h
-CMakeFiles/client.dir/common_aux.c.o: ../common_decoding.h
-CMakeFiles/client.dir/common_aux.c.o: ../common_socket.h
 
 CMakeFiles/client.dir/common_cipher.c.o: ../common_cipher.c
 CMakeFiles/client.dir/common_cipher.c.o: ../common_cipher.h
@@ -27,6 +20,13 @@ CMakeFiles/client.dir/common_cipher.c.o: ../common_decoding.h
 
 CMakeFiles/client.dir/common_decoding.c.o: ../common_decoding.c
 CMakeFiles/client.dir/common_decoding.c.o: ../common_decoding.h
+
+CMakeFiles/client.dir/common_parsing.c.o: ../client.h
+CMakeFiles/client.dir/common_parsing.c.o: ../common_cipher.h
+CMakeFiles/client.dir/common_parsing.c.o: ../common_decoding.h
+CMakeFiles/client.dir/common_parsing.c.o: ../common_parsing.c
+CMakeFiles/client.dir/common_parsing.c.o: ../common_parsing.h
+CMakeFiles/client.dir/common_parsing.c.o: ../common_socket.h
 
 CMakeFiles/client.dir/common_socket.c.o: ../common_socket.c
 CMakeFiles/client.dir/common_socket.c.o: ../common_socket.h

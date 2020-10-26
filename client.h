@@ -12,8 +12,7 @@
 typedef struct client{
     cipher_t cipher;
     socket_t socket;
-    unsigned char read_buffer[CHUNK_SIZE];
-    unsigned char encoded_buffer[CHUNK_SIZE];
+    unsigned char buffer[CHUNK_SIZE];
 } client_t;
 
 int encodeMessage(client_t* self, size_t read_bytes);

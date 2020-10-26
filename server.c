@@ -8,8 +8,8 @@
 
 #define CHUNK_SIZE 64
 #define DECODE_OP 1
+#define SERVER_TYPE 1
 
-size_t receiveChunk(server_t* self);
 int decodeAndPrintChunk(server_t* self, size_t read_bytes);
 
 void printOutput(unsigned char* cadena_encriptada, size_t largo_cadena) {
@@ -18,6 +18,7 @@ void printOutput(unsigned char* cadena_encriptada, size_t largo_cadena) {
 
 int initializeServer(server_t* self) {
     memset(self, 0, sizeof(server_t));
+    return 0;
 }
 
 int finishServerProgram(server_t* server, int ret_value) {
@@ -36,14 +37,17 @@ int finishServerProgram(server_t* server, int ret_value) {
     return ret_value;
 }
 
+int receiveChunk(server_t* self) {
+    return socketReceiveMessage(&self->acceptance_socket, self->buffer);
+}
+
 int serverReceiveMessage(server_t* self, char* method, char* key) {
     int val_cipher_init = cipherInit(&self->cipher, method, key, DECODE_OP);
     if (val_cipher_init != 0)
         return 1;
-    bool should_break = 0;
     while (true) {
-        size_t read_bytes = receiveChunk(self);
-        if (!read_bytes)
+        int read_bytes = receiveChunk(self);
+        if (read_bytes < 1)
             return 1;
         int val_decode = decodeAndPrintChunk(self, read_bytes);
         if (val_decode != 0)
@@ -51,12 +55,13 @@ int serverReceiveMessage(server_t* self, char* method, char* key) {
         if (read_bytes < CHUNK_SIZE)
             break;
     }
+    return 0;
 }
 
 int serverEstablishConnection(server_t* self, char* port) {
-    socketInit(&self->connection_socket);
-    socketInit(&self->acceptance_socket);
-    int val_bind = socketBind(&self->connection_socket, port);
+    socketInit(&self->connection_socket, SERVER_TYPE);
+    socketInit(&self->acceptance_socket, SERVER_TYPE);
+    int val_bind = socketConnect(&self->connection_socket, NULL, port);
     if (val_bind != 0)
         return 1;
 
@@ -65,16 +70,13 @@ int serverEstablishConnection(server_t* self, char* port) {
     return val_accept;
 }
 
-size_t receiveChunk(server_t* self) {
-    socketReceiveMessage(&self->acceptance_socket, self->read_buffer);
-}
-
 int decodeAndPrintChunk(server_t* self, size_t read_bytes) {
-    int val_translate = cipherTranslate(&self->cipher, self->read_buffer,
-                                        read_bytes, self->decoded_buffer);
-    if (val_translate != 0)
+    if (! read_bytes)
+        return 0;
+    int val_trn = cipherTranslate(&self->cipher, self->buffer, read_bytes);
+    if (val_trn != 0)
         return 1;
-    printOutput(self->decoded_buffer, read_bytes);
+    printOutput(self->buffer, read_bytes);
     return 0;
 }
 

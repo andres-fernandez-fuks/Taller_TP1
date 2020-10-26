@@ -9,27 +9,28 @@
 
 #define CHUNK_SIZE 64
 #define CODE_OP 0
+#define CLIENT_TYPE 0
 
 int encodeAndSendChunk(client_t* self, size_t read_bytes);
 
 int encodeMessage(client_t* self, size_t read_bytes) {
     if (! read_bytes)
         return 0;
-    return cipherTranslate(&self->cipher, self->read_buffer, read_bytes,
-                           self-> encoded_buffer);
+    return cipherTranslate(&self->cipher, self->buffer, read_bytes);
 }
 
 int initializeClient(client_t* self) {
     memset(self, 0, sizeof(client_t));
+    return 0;
 }
 
 int clientEstablishConnection(client_t* self, char* host, char* port) {
-    socketInit(&self->socket);
+    socketInit(&self->socket, CLIENT_TYPE);
     return socketConnect(&self->socket, host, port);
 }
 
 size_t readInput(client_t* self) {
-    size_t contador = fread(self->read_buffer, 1, CHUNK_SIZE, stdin);
+    size_t contador = fread(self->buffer, 1, CHUNK_SIZE, stdin);
     return contador;
 }
 
@@ -45,13 +46,14 @@ int clientSendMessage(client_t* self, char* method, char* key) {
         if (val_send != 0)
             return 1;
     }
+    return 0;
 }
 
 int encodeAndSendChunk(client_t* self, size_t read_bytes) {
     int val_encoding = encodeMessage(self, read_bytes);
     if (val_encoding != 0)
         return 1;
-    return socketSendMessage(&self->socket, self->encoded_buffer, read_bytes);
+    return socketSendMessage(&self->socket, self->buffer, read_bytes);
 }
 
 int finishClientProgram(client_t* client, int ret_value) {

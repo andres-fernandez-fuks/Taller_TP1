@@ -6,9 +6,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_C
   "/home/andy/CLionProjects/TP_1/client.c" "/home/andy/CLionProjects/TP_1/cmake-build-debug/CMakeFiles/client.dir/client.c.o"
   "/home/andy/CLionProjects/TP_1/client_main.c" "/home/andy/CLionProjects/TP_1/cmake-build-debug/CMakeFiles/client.dir/client_main.c.o"
-  "/home/andy/CLionProjects/TP_1/common_aux.c" "/home/andy/CLionProjects/TP_1/cmake-build-debug/CMakeFiles/client.dir/common_aux.c.o"
   "/home/andy/CLionProjects/TP_1/common_cipher.c" "/home/andy/CLionProjects/TP_1/cmake-build-debug/CMakeFiles/client.dir/common_cipher.c.o"
   "/home/andy/CLionProjects/TP_1/common_decoding.c" "/home/andy/CLionProjects/TP_1/cmake-build-debug/CMakeFiles/client.dir/common_decoding.c.o"
+  "/home/andy/CLionProjects/TP_1/common_parsing.c" "/home/andy/CLionProjects/TP_1/cmake-build-debug/CMakeFiles/client.dir/common_parsing.c.o"
   "/home/andy/CLionProjects/TP_1/common_socket.c" "/home/andy/CLionProjects/TP_1/cmake-build-debug/CMakeFiles/client.dir/common_socket.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")

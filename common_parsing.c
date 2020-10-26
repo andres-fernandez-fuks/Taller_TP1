@@ -3,7 +3,7 @@
 //
 
 #include <string.h>
-#include "common_aux.h"
+#include "common_parsing.h"
 
 #define CODE_OP 0
 #define DECODE_OP 1

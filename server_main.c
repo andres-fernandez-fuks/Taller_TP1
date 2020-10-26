@@ -3,7 +3,7 @@
 //
 
 #include "server.h"
-#include "common_aux.h"
+#include "common_parsing.h"
 
 #define DECODE_OP 1
 

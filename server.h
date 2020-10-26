@@ -15,8 +15,7 @@ typedef struct server{
     cipher_t cipher;
     socket_t connection_socket;
     socket_t acceptance_socket;
-    unsigned char read_buffer[CHUNK_SIZE];
-    unsigned char decoded_buffer[CHUNK_SIZE];
+    unsigned char buffer[CHUNK_SIZE];
 } server_t;
 
 
