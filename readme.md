@@ -45,23 +45,22 @@ Con un poco más de detalle, el funcionamiento del código es el siguiente:
 
 * TDA CesarEncoder:
 
-    - int offset: el offset usado en la traducción.
-    - int op_type: 0 para codificar, 1 para decodificar.
+        - int offset: el offset usado en la traducción.
+        - int op_type: 0 para codificar, 1 para decodificar.
 
 * TDA VigenereEncoder:
 
-    - char* key_string: la clave de cifrado utilizada.
-    - int op_type: 0 para codificar, 1 para decodificar.
-    - int key_length: el largo de la clave de cifrado.
-    - int last_pos: la última posición visitada en el mensaje (valor necesario para guardar el estado entre chunks del mensaje).
+        - char* key_string: la clave de cifrado utilizada.
+        - int op_type: 0 para codificar, 1 para decodificar.
+        - int key_length: el largo de la clave de cifrado.
+        - int last_pos: la última posición visitada en el mensaje (valor necesario para guardar el estado entre chunks del mensaje).
 
 * TDA Rc4Encoder:
 
-    - char* key_string: la clave de cifrado utilizada.
-    - int key_length: el largo de la clave de cifrado.
-    - int pos_1: la posición 1 utilizada en el cifrado RC4 (valor necesario para guardar el estado entre chunks del mensaje)
-    - int pos_1: la posición 2 utilizada en el cifrado RC4 (valor necesario para guardar el estado entre chunks del mensaje). 
-    - unsigned char arreglo[256]: el arreglo random utilizado en el cifrado RC4 (es necesario guardar el mismo para todo el mensaje).         
+        - char* key_string: la clave de cifrado utilizada.
+        - int pos_1: la posición 1 utilizada en el cifrado RC4 (valor necesario para guardar el estado entre chunks del mensaje)
+        - int pos_1: la posición 2 utilizada en el cifrado RC4 (valor necesario para guardar el estado entre chunks del mensaje). 
+        - unsigned char arreglo[256]: el arreglo random utilizado en el cifrado RC4 (es necesario guardar el mismo para todo el mensaje).         
 
 
 * El cipher codifica el trozo de 64 Bytes del mensaje en un buffer correspondiente al Cliente. El Cliente le indica a su Socket que reenvíe este buffer al socket servidor. El envío del mensaje se hace mediante un ciclo, ya que no necesariamente los 64 Bytes (o el largo del trozo de mensaje) son enviados en una única operación.
