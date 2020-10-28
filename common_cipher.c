@@ -31,25 +31,25 @@ int cipherClose(cipher_t* self) {
 }
 
 int cesarInit(cipher_t* self) {
-    self-> init_callback = &cesarCipherInit;
-    self-> translate_callback = &cesarCipherTranslate;
-    self-> close_callback = &cesarCipherClose;
+    self-> init_callback = &cesarEncoderInit;
+    self-> translate_callback = &cesarEncoderTranslate;
+    self-> close_callback = &cesarEncoderClose;
     self-> encoder = malloc(sizeof(cesarEncoder_t));
     return 0;
 }
 
 int vigenereInit(cipher_t* self) {
-    self-> init_callback = &vigenereCipherInit;
-    self-> translate_callback = &vigenereCipherTranslate;
-    self-> close_callback = &vigenereCipherClose;
+    self-> init_callback = &vigenereEncoderInit;
+    self-> translate_callback = &vigenereEncoderTranslate;
+    self-> close_callback = &vigenereEncoderClose;
     self-> encoder = malloc(sizeof(vigenereEncoder_t));
     return 0;
 }
 
 int rc4Init(cipher_t* self) {
-    self-> init_callback = &rc4CipherInit;
-    self-> translate_callback = &rc4CipherTranslate;
-    self-> close_callback = &rc4CipherClose;
+    self-> init_callback = &rc4EncoderInit;
+    self-> translate_callback = &rc4EncoderTranslate;
+    self-> close_callback = &rc4EncoderClose;
     self-> encoder = malloc(sizeof(rc4Encoder_t));
     return 0;
 }

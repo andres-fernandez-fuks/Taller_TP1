@@ -12,7 +12,7 @@
 #define CONNECT_TYPE 0
 #define BIND_TYPE 1
 
-void setConnectionCallback(socket_t* self, int connection_type) {
+void socketSetConnectionCallback(socket_t* self, int connection_type) {
     switch (connection_type) {
         case CONNECT_TYPE:
             self->connection_callback = &connect;
@@ -27,14 +27,17 @@ int socketInit(socket_t* self, int connection_type) {
     memset(&self->hints, 0, sizeof(struct addrinfo));
     self-> socket_fd = 0;
     self->connection_type = connection_type;
-    setConnectionCallback(self, connection_type);
+    socketSetConnectionCallback(self, connection_type);
     return 0;
 }
 
 int socketClose(socket_t* self) {
+    if (!self)
+        return 1;
     if (shutdown(self->socket_fd,SHUT_RDWR) != 0)
         return 1;
-    freeaddrinfo(self->results);
+    if (self->results)
+        freeaddrinfo(self->results);
     return close(self->socket_fd);
 }
 
@@ -52,7 +55,7 @@ void setBindingOptions(int connection_type, int socket_fd) {
     setsockopt(socket_fd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val));
 }
 
-void iterateAddressesForConnecting(socket_t* self) {
+void socketIterateAddressesForConnecting(socket_t* self) {
     struct addrinfo* address;
     setBindingOptions(self->connection_type, self->socket_fd);
     for (address = self->results; address != NULL; address = address->ai_next) {
@@ -74,7 +77,7 @@ int socketConnect(socket_t* self, char* host_name, char* port_name) {
     search = getaddrinfo(host_name, port_name, &self->hints, &self->results);
     if (search != 0)
         return 1;
-    iterateAddressesForConnecting(self);
+    socketIterateAddressesForConnecting(self);
     if (!self->connection_info)
         return 1;
     return 0;

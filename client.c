@@ -68,13 +68,10 @@ int clientReadEncondeAndSend(client_t* self) {
 }
 
 int clientClose(client_t* self, int ret_value) {
-    if (&self->cipher) {
-        if (cipherClose(&self->cipher) != 0)
-            return 1;
-    }
-    if (&self->socket) {
-        if (socketClose(&self->socket) != 0)
-            return 1;
-    }
+    if (cipherClose(&self->cipher) != 0)
+        return 1;
+    if (socketClose(&self->socket) != 0)
+        return 1;
+
     return ret_value;
 }

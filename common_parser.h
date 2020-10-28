@@ -11,6 +11,4 @@
 
 #endif //TP_1_COMMON_AUX_H
 
-int initializeSocket(socket_t* socket);
-int finishProgram(cipher_t* cipher, socket_t* socket, int ret_value);
-char* obtenerArgumento(char* argumento_original);
+char* parserObtenerArgumento(char* argumento_original);

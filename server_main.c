@@ -3,7 +3,7 @@
 //
 
 #include "server.h"
-#include "common_parsing.h"
+#include "common_parser.h"
 
 #define DECODE_OP 1
 
@@ -14,8 +14,8 @@ int main(int argc, char** argv) {
         return 1;
 
     char* port = argv[1];
-    char* method = obtenerArgumento(argv[2]);
-    char* key = obtenerArgumento(argv[3]);
+    char* method = parserObtenerArgumento(argv[2]);
+    char* key = parserObtenerArgumento(argv[3]);
     int val_receive = serverReceiveMessage(&server, port, method, key);
     return serverClose(&server, val_receive);
 }

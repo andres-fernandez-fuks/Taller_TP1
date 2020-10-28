@@ -24,14 +24,13 @@ void rc4InitiateVector(unsigned char* random_array, unsigned char* key,
     }
 }
 
-int rc4CipherInit(void* self_void, char* key, int op_type) {
+int rc4EncoderInit(void* self_void, char* key, int op_type) {
     rc4Encoder_t* self = (rc4Encoder_t*) self_void;
     self-> key_string = malloc(strlen(key)+1);
     strncpy(self-> key_string, key, strlen(key));
     self-> key_string[strlen(key)] = '\0';
     self-> pos_1 = 0;
     self-> pos_2 = 0;
-    self-> op_type = op_type;
     rc4InitiateVector(self->array, (unsigned char*) key, strlen(key));
     return 0;
 }
@@ -43,7 +42,7 @@ unsigned char rc4Output(rc4Encoder_t* self) {
     return self->array[(self->array[self->pos_1]+self->array[self->pos_2])&255];
 }
 
-int rc4CipherTranslate(void* self_void, unsigned char* buffer, size_t len) {
+int rc4EncoderTranslate(void* self_void, unsigned char* buffer, size_t len) {
     rc4Encoder_t* self = (rc4Encoder_t*) self_void;
     for (size_t i = 0; i < len; ++i) {
         buffer[i] = (unsigned char) buffer[i] ^ rc4Output(self);
@@ -52,8 +51,12 @@ int rc4CipherTranslate(void* self_void, unsigned char* buffer, size_t len) {
     return 0;
 }
 
-int rc4CipherClose(void* self_void) {
+int rc4EncoderClose(void* self_void) {
     rc4Encoder_t* self = (rc4Encoder_t*) self_void;
+    if (!self)
+        return 1;
+    if (!self->key_string)
+        return 1;
     free(self->key_string);
     free(self);
     return 0;

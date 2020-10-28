@@ -10,14 +10,14 @@
 #define CODE_OP 0
 #define DECODE_OP 1
 
-int cesarCipherInit(void* self_void, char* key, int op_type) {
+int cesarEncoderInit(void* self_void, char* key, int op_type) {
     cesarEncoder_t* self = (cesarEncoder_t*) self_void;
     self-> op_type = op_type;
     self-> offset = atoi(key);
     return 0;
 }
 
-int cesarCipherTranslate(void* self_void, unsigned char* buffer, size_t len) {
+int cesarEncoderTranslate(void* self_void, unsigned char* buffer, size_t len) {
     cesarEncoder_t* self = (cesarEncoder_t*) self_void;
     for (size_t i = 0; i < len; ++i) {
         if (self->op_type == CODE_OP)
@@ -28,7 +28,7 @@ int cesarCipherTranslate(void* self_void, unsigned char* buffer, size_t len) {
     return 0;
 }
 
-int cesarCipherClose(void* self_void) {
+int cesarEncoderClose(void* self_void) {
     cesarEncoder_t* self = (cesarEncoder_t*) self_void;
     free(self);
     return 0;

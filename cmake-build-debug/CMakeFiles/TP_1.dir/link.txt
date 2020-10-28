@@ -1,1 +1,0 @@
-/usr/bin/cc -g   CMakeFiles/TP_1.dir/main.c.o  -o TP_1 

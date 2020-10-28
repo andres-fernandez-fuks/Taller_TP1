@@ -36,27 +36,33 @@ Con un poco más de detalle, el funcionamiento del código es el siguiente:
 
 * TDA Cipher:
 
-	Es el TDA que se encarga de codificar o decodificar un mensaje, según se lo crea. Tiene los siguientes atributos:
+	Es el TDA que se "encarga" de codificar o decodificar un mensaje (utiliza internamente un TDA Encoder de acuerdo al tipo de traducción requerido).
 
-	    - callback_t decoding_function: puntero a función de encriptación (más detalle abajo)
-	    - int op_type: 0 si el cipher es de codificación, 1 si es de decodificación.
-    	- char* key_string: clave de encriptación a utilizar en ambas operaciones.
-    	- size_t type: tipo de decodificación (Cesar, Vigenere o RC4).
-    	- size_t count: valor de la última posición que se leyó dentro de la totalidad del mensaje.
-    	- unsigned char rc4_array[256]: arreglo que se utiliza en la encriptación por RC4.
-    	- size_t rc4_pos2: valor adicional que se necesita en la encriptación por RC4.
+	    - callback_t init_function: puntero a función de inicio. Hay una función de inicio por tipo de traducción.
+        - callback_t init_function: puntero a función de traducción. Hay una función de traducción por tipo de traducción.
+        - callback_t init_function: puntero a función de cierre. Hay una función de cierre por tipo de traducción.
+        - void* encoder: un puntero genérico al encoder que finalmente terminará realizando la traducción. Se pasa por parámetro en las tres funciones anteriormente mencionadas. Hay 3 tipos de encoders:
 
-    Los últimos 3 valores del Cipher son necesarios para guardar el "estado" del mensaje que se está encriptando. Una de las dificultades del TP es que tanto Vigenere como RC4 son métodos que contemplan la encriptación de un mensaje total, por lo que, al leer el mensaje de a 64 Bytes, es necesario entre lecturas guardar el estado de algunas variables que permitan llevar a cabo la encriptación de forma correcta. Cesar no presentó esta dificultad, porque su encriptación no depende de la posición actual del mensaje.
+* TDA CesarEncoder:
 
-* **callback_t decoding_function**: es un puntero a la función de encriptación. Funciona para los 3 tipos de encriptación: Cesar, Vigenere y RC4. Si bien las tres funciones comparten sólo algunos parámetros de encriptación, los parámetros en los que difieren son pasados a través de un vector de punteros genéricos, el cual es armado por el cipher de acuerdo a cada función, y desreferenciado dentro de cada una de éstas.
+    - int offset: el offset usado en la traducción.
+    - int op_type: 0 para codificar, 1 para decodificar.
 
-![Captura](capturas/extraVector.png)
+* TDA VigenereEncoder:
 
-. En la función **Cesar**, el vector recibe la clave de decodificación (como string) y el tipo de operación: codificar o decodificar.
+    - char* key_string: la clave de cifrado utilizada.
+    - int op_type: 0 para codificar, 1 para decodificar.
+    - int key_length: el largo de la clave de cifrado.
+    - int last_pos: la última posición visitada en el mensaje (valor necesario para guardar el estado entre chunks del mensaje).
 
-. En la función **Vigenere**, recibe la clave de decodificación, el tipo de operación y la posición actual en el mensaje.
+* TDA Rc4Encoder:
 
-. En la función **RC4**, recibe la posición actual en el mensaje (pos_1 en rc4_output), el vector random que usa la función ya inicializado y la pos_2 en rc4_output.
+    - char* key_string: la clave de cifrado utilizada.
+    - int key_length: el largo de la clave de cifrado.
+    - int pos_1: la posición 1 utilizada en el cifrado RC4 (valor necesario para guardar el estado entre chunks del mensaje)
+    - int pos_1: la posición 2 utilizada en el cifrado RC4 (valor necesario para guardar el estado entre chunks del mensaje). 
+    - unsigned char arreglo[256]: el arreglo random utilizado en el cifrado RC4 (es necesario guardar el mismo para todo el mensaje).         
+
 
 * El cipher codifica el trozo de 64 Bytes del mensaje en un buffer correspondiente al Cliente. El Cliente le indica a su Socket que reenvíe este buffer al socket servidor. El envío del mensaje se hace mediante un ciclo, ya que no necesariamente los 64 Bytes (o el largo del trozo de mensaje) son enviados en una única operación.
 
@@ -77,6 +83,8 @@ Con un poco más de detalle, el funcionamiento del código es el siguiente:
 * Se envía el trozo de mensaje para ser impreso por salida estándar, y se vuelve a iniciar el ciclo. Recién en este momento, se vuelve a tomar la cadena de bytes como un string, por lo que se hace un printf con "%c" como formato.
 
 ### **COMENTARIOS**
+
+* El uso de las líneas **// cppcheck-suppress unusedStructMember** está relacionado a que se utilizan punteros a funciones a la hora de inicializar, traducir y cerrar los encoders. Por lo tanto, cppcheck asume que no se están utilizando los atributos de los encoders cuando en realidad sí están siendo utilizados.
 
 * Además de las dificultades mencionadas, también surgió una a la hora de enviar y recibir el mensaje entre los sockets. Tardé bastante en darme cuenta de ir actualizando la posición inicial del envío del buffer en cada **send** y en cada **receive**. Es decir, si en la primera operación de envío se enviaron n bytes, en la próxima operación el envío del mensaje debía comenzar desde la posición buffer[n], y la cantidad de bytes a enviar debería ser de k-n bytes (con k el largo del trozo de mensaje). De forma análoga debía hacerse con la recepción del mensaje.
 

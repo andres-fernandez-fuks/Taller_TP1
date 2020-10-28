@@ -5,6 +5,9 @@
 #ifndef TP_1_COMMON_ENCODERVIGENERE_H
 #define TP_1_COMMON_ENCODERVIGENERE_H
 
+// el uso de las líneas para suprimir cppcheck está justificado en la sección
+// de comentarios del informe
+
 typedef struct vigenereEncoder{
     // cppcheck-suppress unusedStructMember	
     char* key_string;
@@ -16,8 +19,9 @@ typedef struct vigenereEncoder{
     int op_type;
 } vigenereEncoder_t;
 
-int vigenereCipherInit(void* self_void, char* key, int op_type);
-int vigenereCipherTranslate(void* self_void, unsigned char* buffer, size_t len);
-int vigenereCipherClose(void* self_void);
+int vigenereEncoderInit(void* self_void, char* key, int op_type);
+int vigenereEncoderTranslate(void* self_void, unsigned char* buffer,
+	size_t len);
+int vigenereEncoderClose(void* self_void);
 
 #endif //TP_1_COMMON_ENCODERVIGENERE_H

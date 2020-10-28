@@ -10,7 +10,7 @@
 #define DECODE_OP 1
 
 
-int vigenereCipherInit(void* self_void, char* key, int op_type) {
+int vigenereEncoderInit(void* self_void, char* key, int op_type) {
     vigenereEncoder_t* self = (vigenereEncoder_t*) self_void;
     self-> key_string = malloc(strlen(key)+1);
     strncpy(self-> key_string, key, strlen(key));
@@ -21,7 +21,8 @@ int vigenereCipherInit(void* self_void, char* key, int op_type) {
     return 0;
 }
 
-int vigenereCipherTranslate(void* self_void, unsigned char* buffer, size_t len){
+int vigenereEncoderTranslate(void* self_void, unsigned char* buffer,
+    size_t len){
     vigenereEncoder_t* self = (vigenereEncoder_t*) self_void;
     for (size_t i = 0; i < len; i++) {
         int pos_clave = (i+self->last_pos) % self->key_length;
@@ -34,8 +35,12 @@ int vigenereCipherTranslate(void* self_void, unsigned char* buffer, size_t len){
     return 0;
 }
 
-int vigenereCipherClose(void* self_void) {
+int vigenereEncoderClose(void* self_void) {
     vigenereEncoder_t* self = (vigenereEncoder_t*) self_void;
+    if (!self)
+        return 1;
+    if (!self->key_string)
+        return 1;
     free(self->key_string);
     free(self);
     return 0;

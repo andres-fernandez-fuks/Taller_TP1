@@ -12,7 +12,7 @@
 
 int serverReceiveDecodeAndPrint(server_t* self, bool* keep_receiving);
 
-size_t printOutput(unsigned char* cadena_encriptada, size_t largo_cadena) {
+size_t serverPrintOutput(unsigned char* cadena_encriptada, size_t largo_cadena){
     return fwrite(cadena_encriptada, 1, largo_cadena, stdout);
 }
 
@@ -22,18 +22,15 @@ int serverInit(server_t* self) {
 }
 
 int serverClose(server_t* server, int ret_value) {
-    if (&server->cipher) {
-        if (cipherClose(&server->cipher) != 0)
-            return 1;
-    }
-    if (&server->connection_socket) {
-        if (socketClose(&server->connection_socket) != 0)
-            return 1;
-    }
-    if (&server->acceptance_socket) {
-        if (socketClose(&server->acceptance_socket) != 0)
-            return 1;
-    }
+    if (cipherClose(&server->cipher) != 0)
+        return 1;
+
+    if (socketClose(&server->connection_socket) != 0)
+        return 1;
+
+    if (socketClose(&server->acceptance_socket) != 0)
+        return 1;
+
     return ret_value;
 }
 
@@ -82,7 +79,7 @@ int serverDecodeChunk(server_t* self, int read_bytes) {
 int serverPrintChunk(server_t* self, int read_bytes) {
     if (!read_bytes)
         return 0;
-    size_t written_bytes = printOutput(self->buffer, read_bytes);
+    size_t written_bytes = serverPrintOutput(self->buffer, read_bytes);
     if ((int) written_bytes == read_bytes)
         return 0;
     return 1;
