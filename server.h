@@ -18,15 +18,10 @@ typedef struct server{
     unsigned char buffer[CHUNK_SIZE];
 } server_t;
 
+int serverInit(server_t* self);
+int serverReceiveMessage(server_t* server,char* port, char* method_name,
+                         char* key);
+int serverClose(server_t* server, int ret_value);
 
-int decode(cipher_t* cipher, unsigned char* coded_buffer, unsigned char*
-decoded_buffer, size_t read_bytes, char** argv);
-int receiveDecodeAndPrint(cipher_t* cipher, socket_t* socket, char** argv,
-                          bool* shouldBreak);
-void printOutput(unsigned char* cadena_encriptada, size_t largo_cadena);
-int initializeServer(server_t* self);
-int serverEstablishConnection(server_t* self, char* port);
-int finishServerProgram(server_t* server, int ret_value);
-int serverReceiveMessage(server_t* server, char* method_name, char* key);
 
 #endif //TP_1_SERVER_H

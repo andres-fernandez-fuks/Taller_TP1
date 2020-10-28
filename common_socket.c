@@ -24,8 +24,6 @@ void setConnectionCallback(socket_t* self, int connection_type) {
 }
 
 int socketInit(socket_t* self, int connection_type) {
-    self->connection_info = malloc(sizeof(struct addrinfo));
-    self->results = malloc(sizeof(struct addrinfo));
     memset(&self->hints, 0, sizeof(struct addrinfo));
     self-> socket_fd = 0;
     self->connection_type = connection_type;
@@ -37,7 +35,6 @@ int socketClose(socket_t* self) {
     if (shutdown(self->socket_fd,SHUT_RDWR) != 0)
         return 1;
     freeaddrinfo(self->results);
-    //freeaddrinfo(self->connection_info);
     return close(self->socket_fd);
 }
 
@@ -98,28 +95,28 @@ int socketAcceptConnection(socket_t* connection_sckt, socket_t* accept_sckt) {
 int socketReceiveMessage(socket_t* self, unsigned char* buffer) {
     if (self->socket_fd <0)
         return 1;
-    size_t contador = 0;
-    while (contador < CHUNK_SIZE) {
-        int bytes_recv = recv(self->socket_fd, &buffer[contador],
-                              CHUNK_SIZE-contador, 0);
+    size_t counter = 0;
+    while (counter < CHUNK_SIZE) {
+        int bytes_recv = recv(self->socket_fd, &buffer[counter],
+                              CHUNK_SIZE-counter, 0);
         if (bytes_recv < 0) {
             return -1;
         }
-        contador += bytes_recv;
+        counter += bytes_recv;
         if (bytes_recv == 0)
             break;
     }
-    return contador;
+    return counter;
 }
 
 int socketSendMessage(socket_t* self, unsigned char* message, size_t len) {
-    size_t contador = 0;
-    while (contador < len) {
-        int bytes_written = send(self->socket_fd, &message[contador],
-                                 len-contador, MSG_NOSIGNAL);
+    size_t counter = 0;
+    while (counter < len) {
+        int bytes_written = send(self->socket_fd, &message[counter],
+                                 len-counter, MSG_NOSIGNAL);
         if (bytes_written < 0)
             return 1;
-        contador += bytes_written;
+        counter += bytes_written;
     }
     return 0;
 }

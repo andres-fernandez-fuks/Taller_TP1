@@ -15,10 +15,10 @@ typedef struct client{
     unsigned char buffer[CHUNK_SIZE];
 } client_t;
 
-int encodeMessage(client_t* self, size_t read_bytes);
-int initializeClient(client_t* self);
-int clientEstablishConnection(client_t* self, char* host, char* port);
-int clientSendMessage(client_t* self, char* method, char* name);
-int finishClientProgram(client_t* self, int ret_value);
+
+int clientInit(client_t* self);
+int clientSendMessage(client_t* self, char* host, char* port, char* method,
+                      char* key);
+int clientClose(client_t* self, int ret_value);
 
 #endif //TP_1_CLIENT_AUX_H

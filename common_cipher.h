@@ -2,32 +2,27 @@
 // Created by andres on 10/10/20.
 //
 
-#include "common_decoding.h"
+#include "common_encoderCesar.h"
+#include "common_encoderVigenere.h"
+#include "common_encoderRC4.h"
 
 #ifndef TP_1_COMMON_CIPHER_H
 #define TP_1_COMMON_CIPHER_H
 
-
-/*
- * Las 3 funciones de decodificacion reciben parametros parecidos, aunque no
- * exactamente los mismos. Para manejar la diferencia entre los parametros que
- * recibe cada funcion, uso el vector de punteros genericos "extra"/
- */
-
-typedef int (*callback_t)(unsigned char* input, size_t len, void** extra);
+typedef int (*init_callback_t)(void* cipher, char* key, int op_type);
+typedef int (*translate_callback_t)(void* cipher, unsigned char* input,
+        size_t len);
+typedef int (*close_callback_t)(void* cipher);
 
 typedef struct cipher{
-    callback_t decoding_function;
-    char* key_string;
-    size_t count;
-    int op_type;
-    int method;
-    unsigned char rc4_array[256];
-    size_t rc4_pos2;
+    init_callback_t init_callback;
+    translate_callback_t translate_callback;
+    close_callback_t close_callback;
+    void* encoder;
 } cipher_t;
 
 int cipherInit(cipher_t* self, char* method_name, char* key, int op_type);
-int cipherDestroy(cipher_t* self);
-int cipherTranslate(cipher_t* self, unsigned char* input, size_t len);
+int cipherClose(cipher_t* self);
+int cipherTranslate(cipher_t* self, unsigned char* buffer, size_t len);
 
 #endif //TP_1_COMMON_CIPHER_H

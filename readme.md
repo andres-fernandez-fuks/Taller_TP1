@@ -8,11 +8,7 @@
 
 ### **DESCRIPCIÓN**
 
-El siguiente esquema muestra de forma muy general el funcionamiento del código:
-
-![Captura](capturas/cicloDelMensaje.png)
-
-Incluyo también una especie de diagrama de secuencia del envío del mensaje. Como no es un programa orientado a objetos, me di algunas libertades con la idea de que el diagrama sea lo más claro posible en cuanto al funcionamiento del programa.
+El siguiente diagrama muestra de forma muy general el funcionamiento del código:
 
 ![Captura](capturas/MessageDiagram.png)
 
@@ -23,7 +19,7 @@ Con un poco más de detalle, el funcionamiento del código es el siguiente:
     Son los TDAs que se encargan de llevar a cabo el envío y la recepción del mensaje de forma general. Ambos cuentan con los siguientes atributos:
 
         - TDA Cipher: para codificar/decodificar el mensaje.
-        - TDA Socket: para enviar/recibir el mensaje.
+        - TDA Socket: para enviar/recibir el mensaje. El Server tiene dos sockets, uno de conexión y otro de aceptación.
         - Buffer: el buffer utilizado para transportar cada chunk del mensaje desde que se lee de STDIN hasta que se escribe en STDOUT.
 
 

@@ -14,15 +14,6 @@
 typedef int (*connection_callback_t)(int sockfd, const struct sockaddr *addr,
         socklen_t addrlen);
 
-typedef struct Socket{
-    struct addrinfo* connection_info;
-    struct addrinfo* results;
-    struct addrinfo hints;
-    int socket_fd;
-    connection_callback_t connection_callback;
-    int connection_type;
-} socket_t;
-/*
 struct addrinfo {
     int              ai_flags;
     int              ai_family;
@@ -33,7 +24,18 @@ struct addrinfo {
     char            *ai_canonname;
     struct addrinfo *ai_next;
 };
-*/
+
+typedef struct Socket{
+    struct addrinfo* connection_info;
+    struct addrinfo* results;
+    struct addrinfo hints;
+    int socket_fd;
+    connection_callback_t connection_callback;
+    int connection_type;
+} socket_t;
+
+
+
 int getaddrinfo(const char *node, const char *service,
                const struct addrinfo *hints, struct addrinfo **res);
 

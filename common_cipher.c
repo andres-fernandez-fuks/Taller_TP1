@@ -6,113 +6,50 @@
 #include <string.h>
 #include <stdlib.h>
 #include "common_cipher.h"
-#include "common_decoding.h"
-
-#define CODE_OP 0
-#define DECODE_OP 1
-#define CESAR_TYPE 1
-#define VIGENERE_TYPE 2
-#define RC4_TYPE 3
 
 int cesarInit(cipher_t* self);
 int vigenereInit(cipher_t* self);
 int rc4Init(cipher_t* self);
-void** assembleExtraVector(cipher_t* self);
-int determineEncodingMethod(cipher_t* self, char* method_name);
+
 
 int cipherInit(cipher_t* self, char* method_name, char* key, int op_type) {
-    self-> op_type = op_type;
-    self-> key_string = malloc(strlen(key)+1);
-    strncpy(self-> key_string, key, strlen(key));
-    self-> key_string[strlen(key)] = '\0';
-    return determineEncodingMethod(self, method_name);
+    if (strcmp(method_name,"cesar") == 0)
+        cesarInit(self);
+    else if (strcmp(method_name,"vigenere") == 0)
+        vigenereInit(self);
+    else if (strcmp(method_name,"rc4") == 0)
+        rc4Init(self);
+    return self->init_callback(self->encoder, key, op_type);
 }
 
-int cipherTranslate(cipher_t* self, unsigned char* input, size_t len) {
-    void** extra = assembleExtraVector(self);
-    if (!extra)
-        return 1;
-    int val_encoding = self-> decoding_function(input, len, extra);
-    free(extra);
-    return val_encoding;
+int cipherTranslate(cipher_t* self, unsigned char* buffer, size_t len) {
+    return self->translate_callback(self->encoder, buffer, len);
 }
 
-int cipherDestroy(cipher_t* self) {
-    free(self-> key_string);
-    return 0;
+int cipherClose(cipher_t* self) {
+    return self->close_callback(self->encoder);
 }
 
 int cesarInit(cipher_t* self) {
-    self-> decoding_function = &cesarEncoding;
-    self-> method = CESAR_TYPE;
+    self-> init_callback = &cesarCipherInit;
+    self-> translate_callback = &cesarCipherTranslate;
+    self-> close_callback = &cesarCipherClose;
+    self-> encoder = malloc(sizeof(cesarEncoder_t));
     return 0;
 }
 
 int vigenereInit(cipher_t* self) {
-    self-> decoding_function = &vigenereEncoding;
-    self-> count = 0;
-    self-> method = VIGENERE_TYPE;
+    self-> init_callback = &vigenereCipherInit;
+    self-> translate_callback = &vigenereCipherTranslate;
+    self-> close_callback = &vigenereCipherClose;
+    self-> encoder = malloc(sizeof(vigenereEncoder_t));
     return 0;
 }
 
 int rc4Init(cipher_t* self) {
-    self-> decoding_function = &rc4Encoding;
-    self-> method = RC4_TYPE;
-    self-> count = 0;
-    self-> rc4_pos2 = 0;
-    memset(self->rc4_array, 0, sizeof(self->rc4_array));
-    rc4InitiateVector(self->rc4_array, (unsigned char *) self->key_string,
-                      strlen(self->key_string));
+    self-> init_callback = &rc4CipherInit;
+    self-> translate_callback = &rc4CipherTranslate;
+    self-> close_callback = &rc4CipherClose;
+    self-> encoder = malloc(sizeof(rc4Encoder_t));
     return 0;
-}
-
-void** cesarVector(cipher_t* self) {
-    void** extra = malloc(2*sizeof(void*));
-    if (!extra)
-        return NULL;
-    extra[0] = (void*) &self->op_type;
-    extra[1] = (void*) self->key_string;
-    return extra;
-}
-
-void** vigenereVector(cipher_t* self) {
-    void** extra = malloc(3*sizeof(void*));
-    if (!extra)
-        return NULL;
-    extra[0] = (void*) &self->op_type;
-    extra[1] = (void*) &self->count;
-    extra[2] = (void*) self->key_string;
-    return extra;
-}
-
-void** rc4Vector(cipher_t* self) {
-    void ** extra = malloc(3*sizeof(void*));
-    if (!extra)
-        return NULL;
-    extra[0] = (void*) self->rc4_array;
-    extra[1] = (void*) &self->count;
-    extra[2] = (void*) &self->rc4_pos2;
-    return extra;
-}
-
-void** assembleExtraVector(cipher_t* self) {
-    switch (self->method) {
-        case CESAR_TYPE:
-            return cesarVector(self);
-        case VIGENERE_TYPE:
-            return vigenereVector(self);
-        case RC4_TYPE:
-            return rc4Vector(self);
-    }
-    return NULL;
-}
-
-int determineEncodingMethod(cipher_t* self, char* method_name) {
-    if (strcmp(method_name,"cesar") == 0)
-        return cesarInit(self);
-    else if (strcmp(method_name,"vigenere") == 0)
-        return vigenereInit(self);
-    else if (strcmp(method_name,"rc4") == 0)
-        return rc4Init(self);
-    return 1;
 }
